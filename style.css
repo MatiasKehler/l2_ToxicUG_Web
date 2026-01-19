@@ -1,0 +1,482 @@
+/* =========================================
+   1. RESET Y CONFIGURACIÓN GLOBAL
+   ========================================= */
+   html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px; /* Compensa la barra fija al navegar */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #eee;
+    padding-top: 80px;
+
+    /* --- FONDO INMERSIVO --- */
+    /* Ajustado a 0.2/0.4 para que se vea bien el arte */
+    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('assets/img_Fondo_Principal.png');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: #0a0a0a;
+}
+
+/* Fuentes Góticas/Gamer */
+h1, h2, h3, .nav-link, .btn-cta, .logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 700; 
+}
+
+ul { list-style: none; }
+a { text-decoration: none; color: inherit; }
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   2. HEADER (Navegación)
+   ========================================= */
+header {
+    background: #111;
+    color: #fff;
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #333;
+}
+
+/* Estado "Scrolled" */
+header.scrolled {
+    background: rgba(0, 0, 0, 0.95);
+    padding: 0.5rem 0;
+    box-shadow: 0 2px 10px rgba(57, 255, 20, 0.1);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    z-index: 1001;
+    letter-spacing: 1px;
+}
+
+/* --- Enlaces del Menú --- */
+.nav-link {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.nav-link:hover { color: #39ff14; }
+
+/* Línea animada inferior */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #39ff14;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease-out;
+}
+
+.nav-link:hover::after { transform: scaleX(1); }
+
+/* --- Botón "Unirse" --- */
+.nav-link.btn-primary {
+    background: #007bff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white !important;
+}
+
+.nav-link.btn-primary::after { display: none; }
+
+.nav-link.btn-primary:hover {
+    background: #39ff14;
+    color: #000 !important;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+}
+
+/* --- Hamburguesa --- */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+}
+
+/* =========================================
+   3. SECCIÓN HERO (Portada)
+   ========================================= */
+.hero {
+    min-height: 50vh;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    padding-top: 150px;
+    padding-bottom: 40px;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 5px rgba(0,0,0,1);
+}
+
+.btn-cta {
+    display: inline-block;
+    padding: 12px 40px;
+    background: #28a745;
+    color: white;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+.btn-cta:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+/* =========================================
+   4. SECCIONES Y CONTENEDORES
+   ========================================= */
+.about {
+    padding: 0 0 60px 0;
+    text-align: center;
+    background: transparent; 
+}
+
+.about h2 {
+    color: #fff;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+/* --- Caja de Historia --- */
+.history-box {
+    background: rgba(15, 15, 15, 0.85);
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    border-left: 4px solid #39ff14;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: blur(5px);
+}
+
+.history-box p {
+    color: #ccc;
+    font-size: 1.15rem;
+}
+
+.divider-small {
+    height: 3px;
+    width: 150px;
+    background: #39ff14;
+    margin: 40px auto;
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+    border-radius: 2px;
+}
+
+/* Subtítulo estilo "Pastilla" para mejor lectura */
+.section-subtitle {
+    color: #fff;             /* Blanco puro para máximo contraste */
+    font-size: 1.1rem;       /* Un poco más grande */
+    font-weight: 500;
+    
+    /* El truco de la pastilla de fondo: */
+    background-color: rgba(0, 0, 0, 0.7); /* Negro al 70% de opacidad */
+    display: inline-block;   /* La caja se ajusta al tamaño del texto */
+    padding: 8px 25px;       /* Relleno para que no quede apretado */
+    border-radius: 50px;     /* Bordes completamente redondos */
+    
+    margin-bottom: 35px;     /* Espacio antes de las cards */
+    
+    /* Un toque estético extra (Borde verde sutil) */
+    border: 1px solid rgba(57, 255, 20, 0.3); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra para que flote */
+}
+
+/* =========================================
+   5. CARDS (Staff, Proyectos y Juegos)
+   ========================================= */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- Estilo Base para Cards (Oscuro) --- */
+.card, .member-card {
+    background: rgba(20, 20, 20, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    transition: transform 0.3s, border-color 0.3s;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.card:hover, .member-card:hover {
+    transform: translateY(-5px);
+    border-color: #39ff14;
+}
+
+.card h3 {
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.card p { color: #aaa; }
+
+/* --- Lineage 2 Project Card --- */
+.card.l2-project {
+    border-left: 5px solid #dba718;
+}
+
+.specs-list {
+    margin: 15px 0;
+    text-align: left;
+    color: #ccc;
+}
+.specs-list li { margin-bottom: 8px; }
+
+.status-badge {
+    display: inline-block;
+    background: rgba(0, 123, 255, 0.2);
+    color: #007bff;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: 1px solid #007bff;
+    margin-top: 15px;
+}
+
+/* --- Member Cards --- */
+.avatar-container { margin-bottom: 20px; }
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #39ff14;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.3);
+}
+
+.role {
+    color: #39ff14;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* --- Game Cards (Banners) --- */
+.game-card {
+    height: 180px;
+    padding: 0 !important;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #333;
+}
+
+.game-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+}
+
+.game-content h3 {
+    font-size: 1.8rem;
+    color: #fff;
+    text-shadow: 0 2px 10px #000;
+    margin-bottom: 5px;
+}
+
+.game-content span {
+    font-size: 0.9rem;
+    color: #39ff14;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.game-card:hover .game-content { background: rgba(0, 0, 0, 0.3); }
+.game-card:hover { border-color: #39ff14; transform: scale(1.03); }
+
+/* Fondos Juegos (Asegúrate de tener estas imágenes) */
+.l2-bg { background: url('assets/img_Lineage_2.png') center/cover no-repeat; }
+.cs2-bg { background: url('assets/img_Cs_2.png') center/cover no-repeat; }
+.dota-bg { background: url('assets/img_Dota_2.png') center/cover no-repeat; }
+.ashes-bg { background: url('assets/img_Ashes_of_Creation.png') center/cover no-repeat; }
+
+/* =========================================
+   6. REDES SOCIALES
+   ========================================= */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.social-btn {
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #fff;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.twitch { background-color: #9146ff; }
+.twitch:hover { background-color: #772ce8; box-shadow: 0 0 10px #9146ff; }
+
+.youtube { background-color: #ff0000; }
+.youtube:hover { background-color: #cc0000; box-shadow: 0 0 10px #ff0000; }
+
+.discord { background-color: #5865F2; }
+.discord:hover { background-color: #4752c4; box-shadow: 0 0 10px #5865F2; }
+
+.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+.instagram:hover { filter: brightness(1.2); box-shadow: 0 0 15px rgba(220, 39, 67, 0.7); transform: scale(1.05); }
+
+.kick { background-color: #53FC18; color: #000 !important; }
+.kick:hover { background-color: #39ff14; box-shadow: 0 0 15px rgba(83, 252, 24, 0.6); }
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+footer {
+    background: #111;
+    color: #777;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 80px;
+    border-top: 1px solid #222;
+}
+
+/* =========================================
+   8. RESPONSIVE (Móvil vs PC)
+   ========================================= */
+
+/* --- Escritorio (PC) --- */
+@media (min-width: 769px) {
+    .nav-menu {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        position: static; 
+        height: auto;
+        width: auto;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+    }
+    .hamburger { display: none !important; }
+    
+    header.scrolled .nav-menu {
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        box-shadow: none;
+        padding: 0;
+        right: auto;
+    }
+}
+
+/* --- Móviles (< 768px) --- */
+@media (max-width: 768px) {
+    .hamburger { display: block; }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #111;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: 0.3s;
+        padding-top: 60px;
+    }
+    .nav-menu.active { left: 0; }
+    
+    .hero-content h1 { font-size: 2.2rem; }
+    .history-box { padding: 20px; }
+}
+
+/* Animación Hamburguesa */
+.hamburger.active .bar:nth-child(2) { opacity: 0; }
+.hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
