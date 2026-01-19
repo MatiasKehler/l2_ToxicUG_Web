@@ -3,22 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toxic Under Groove</title>
+    <title>ToxicUG</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="assets/img_Icon.png">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <div class="container nav-container">
-            <div class="logo">Toxic Under Groove</div>
+            <a href="#inicio" class="logo">Toxic Under Groove</a>
             
             <nav>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
-                    <li class="nav-item"><a href="#nosotros" class="nav-link">Nosotros</a></li>
-                    <li class="nav-item"><a href="#eventos" class="nav-link">Eventos</a></li>
-                    <li class="nav-item"><a href="https://discord.gg/tDB8zjekMZ" target="_blank" class="nav-link btn-primary">Unirse</a></li>
+                    <li class="nav-item"><a href="#inicio" class="nav-link" data-i18n="nav_home">Inicio</a></li>
+                    <li class="nav-item"><a href="#nosotros" class="nav-link" data-i18n="nav_about">Nosotros</a></li>
+                    <li class="nav-item"><a href="#eventos" class="nav-link" data-i18n="nav_events">Eventos</a></li>
+                    <li class="nav-item"><a href="https://discord.gg/tDB8zjekMZ" target="_blank" class="nav-link btn-primary" data-i18n="nav_join">Unirse</a></li>
+                    
+                    <div class="lang-flags">
+                        <img src="https://flagcdn.com/w40/ar.png" 
+                             alt="Español" 
+                             class="flag-btn active" 
+                             onclick="setLanguage('es', this)">
+                        
+                        <img src="https://flagcdn.com/w40/us.png" 
+                             alt="English" 
+                             class="flag-btn" 
+                             onclick="setLanguage('en', this)">
+                    </div>
                 </ul>
             </nav>
 
@@ -32,10 +45,8 @@
 
     <section id="inicio" class="hero">
         <div class="container hero-content">
-            <h1>¡Sé parte de nuestra comunidad!</h1>
-            <a href="https://discord.gg/tDB8zjekMZ" class="btn-cta" target="_blank" rel="noopener noreferrer">
-                Unirme al Discord
-            </a>
+            <h1 data-i18n="hero_title">¡Sé parte de nuestra comunidad!</h1>
+            <a href="https://discord.gg/tDB8zjekMZ" class="btn-cta" data-i18n="hero_btn" target="_blank" rel="noopener noreferrer">Unirme al Discord</a>
         </div>
     </section>
 
@@ -43,8 +54,8 @@
         <div class="container">
             
             <div class="history-box">
-                <h2>El Origen de Toxic Under Groove</h2>
-                <p>
+                <h2 data-i18n="origin_title">El Origen de Toxic Under Groove</h2>
+                <p data-i18n="origin_text">
                     Todo comenzó con un grupo de amigos cansados de la monotonía. 
                     Lo que empezó como unas simples partidas nocturnas se transformó en una hermandad. 
                     Hoy somos una comunidad consolidada buscando crear 
@@ -54,7 +65,7 @@
 
             <div class="divider-small"></div>
 
-            <h2>Nuestros Referentes</h2>
+            <h2 data-i18n="staff_title">Nuestros Referentes</h2>
             
             <div class="cards-grid">
                 
@@ -63,7 +74,7 @@
                         <img src="assets/images (2).jpg" alt="Avatar wadeN" class="avatar">
                     </div>
                     <h3>wadeN</h3>
-                    <p class="role">Admin & Developer</p>
+                    <p class="role" data-i18n="role_admin">Admin & Developer</p>
                     <div class="social-links">
                         <a href="https://kick.com/waden-zs" target="_blank" class="social-btn kick">Kick</a>
                         <a href="https://www.instagram.com/matiaskehler" target="_blank" class="social-btn instagram">Instagram</a>
@@ -75,7 +86,7 @@
                         <img src="assets/avatar_placeholder.png" alt="Avatar aAbyZz" class="avatar">
                     </div>
                     <h3>aAbyZz</h3>
-                    <p class="role">Team Leader</p>
+                    <p class="role" data-i18n="role_team_leader">Team Leader</p>
                     <div class="social-links">
                         <a href="#" target="_blank" class="social-btn instagram">Instagram</a>
                         <a href="#" target="_blank" class="social-btn youtube">YouTube</a>
@@ -87,72 +98,78 @@
                         <img src="assets/avatar_placeholder.png" alt="Avatar ShadowWalker" class="avatar">
                     </div>
                     <h3>ShadowWalker</h3>
-                    <p class="role">Líder de Clan</p>
+                    <p class="role" data-i18n="role_clan_leader">Líder de Clan</p>
                     <div class="social-links">
                         <a href="#" target="_blank" class="social-btn twitch">Twitch</a>
                     </div>
                 </div>
 
-            </div> <div class="divider-small"></div>
+            </div> 
+            
+            <div class="divider-small"></div>
 
-            <h2>Nuestra Rotación</h2>
-            <p class="section-subtitle">Además de desarrollar, competimos y nos divertimos en:</p>
+            <h2 data-i18n="rotation_title">Nuestra Rotación</h2>
+            <p class="section-subtitle" data-i18n="rotation_subtitle">Además de desarrollar, competimos y nos divertimos en:</p>
 
             <div class="cards-grid">
                 
                 <div class="card game-card l2-bg">
                     <div class="game-content">
                         <h3>Lineage 2</h3>
-                        <span>Main Core</span>
+                        <span data-i18n="game_core">Main Core</span>
                     </div>
                 </div>
 
                 <div class="card game-card cs2-bg">
                     <div class="game-content">
                         <h3>Counter Strike 2</h3>
-                        <span>Premier</span>
+                        <span data-i18n="game_comp">Competitivo</span>
                     </div>
                 </div>
 
                 <div class="card game-card dota-bg">
                     <div class="game-content">
                         <h3>Dota 2</h3>
-                        <span>Ranked</span>
+                        <span data-i18n="game_ranked">Ranked</span>
                     </div>
                 </div>
 
                 <div class="card game-card ashes-bg">
                     <div class="game-content">
                         <h3>Ashes of Creation</h3>
-                        <span>Esperando Launch</span>
+                        <span data-i18n="game_waiting">Esperando Launch</span>
                     </div>
                 </div>
 
-            </div> </div> </section> <section id="eventos" class="about">
+            </div> 
+        </div> 
+    </section>
+
+    <section id="eventos" class="about">
         <div class="container">
-            <h2>Nuestros Proyectos</h2>
+            <h2 data-i18n="projects_title">Nuestros Proyectos</h2>
             
             <div class="cards-grid">
                 
                 <div class="card l2-project">
-                    <h3>⚔️ Próximamente: Lineage 2</h3>
-                    <p>Estamos desarrollando nuestro propio servidor <strong>Crónica High Five (H5)</strong>.</p>
+                    <h3 data-i18n="proj_l2_title">⚔️ Próximamente: Lineage 2</h3>
+                    <p data-i18n="proj_l2_desc">Estamos desarrollando nuestro propio servidor <strong>Crónica High Five (H5)</strong>.</p>
                     <ul class="specs-list">
-                        <li>🔹 Files Java PTS (Mecánicas retail)</li>
-                        <li>🔹 Estabilidad garantizada</li>
-                        <li>🔹 Comunidad competitiva</li>
+                        <li data-i18n="proj_l2_feat1">🔹 Files Java PTS (Mecánicas retail)</li>
+                        <li data-i18n="proj_l2_feat2">🔹 Estabilidad garantizada</li>
+                        <li data-i18n="proj_l2_feat3">🔹 Comunidad competitiva</li>
                     </ul>
-                    <div class="status-badge">🛠️ En construcción</div>
+                    <div class="status-badge" data-i18n="proj_l2_status">🛠️ En construcción</div>
                 </div>
 
                 <div class="card">
-                    <h3>🏆 Torneos Semanales</h3>
-                    <p>Organizamos copas todos los fines de semana con premios exclusivos para la comunidad.</p>
+                    <h3 data-i18n="proj_tourney_title">🏆 Torneos Semanales</h3>
+                    <p data-i18n="proj_tourney_desc">Organizamos copas todos los fines de semana con premios exclusivos para la comunidad.</p>
                 </div>
 
                 <div class="card">
-                    <h3>📢 Sorteos y Eventos</h3>
-                    <p>Participa en sorteos mensuales de items, cuentas premium y merchandising oficial.</p>
+                    <h3 data-i18n="proj_giveaway_title">📢 Sorteos y Eventos</h3>
+                    <p data-i18n="proj_giveaway_desc">Participa en sorteos mensuales de items, cuentas premium y merchandising oficial.</p>
                 </div>
 
             </div>
@@ -161,7 +178,7 @@
 
     <footer id="contacto">
         <div class="container">
-            <p>&copy; 2026 Toxic Under Groove. Todos los derechos reservados.</p>
+            <p data-i18n="footer_copy">&copy; 2026 Toxic Under Groove. Todos los derechos reservados.</p>
         </div>
     </footer>
 

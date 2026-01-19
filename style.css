@@ -19,7 +19,6 @@ body {
     padding-top: 80px;
 
     /* --- FONDO INMERSIVO --- */
-    /* Ajustado a 0.2/0.4 para que se vea bien el arte */
     background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('assets/img_Fondo_Principal.png');
     background-attachment: fixed;
     background-size: cover;
@@ -122,6 +121,35 @@ header.scrolled {
     background: #39ff14;
     color: #000 !important;
     box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+}
+
+/* --- SELECTOR DE IDIOMA (Banderas) --- */
+.lang-flags {
+    display: flex;
+    gap: 15px;
+    margin-left: 25px;
+    align-items: center;
+}
+
+.flag-btn {
+    width: 32px;
+    height: auto;
+    cursor: pointer;
+    opacity: 0.5;      /* Por defecto un poco apagadas */
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    border: 2px solid transparent;
+}
+
+.flag-btn:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.flag-btn.active {
+    opacity: 1;
+    border-color: #39ff14; /* Borde VERDE TÓXICO */
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
 }
 
 /* --- Hamburguesa --- */
@@ -229,23 +257,18 @@ header.scrolled {
     border-radius: 2px;
 }
 
-/* Subtítulo estilo "Pastilla" para mejor lectura */
+/* Subtítulo estilo "Pastilla" */
 .section-subtitle {
-    color: #fff;             /* Blanco puro para máximo contraste */
-    font-size: 1.1rem;       /* Un poco más grande */
+    color: #fff;
+    font-size: 1.1rem;
     font-weight: 500;
-    
-    /* El truco de la pastilla de fondo: */
-    background-color: rgba(0, 0, 0, 0.7); /* Negro al 70% de opacidad */
-    display: inline-block;   /* La caja se ajusta al tamaño del texto */
-    padding: 8px 25px;       /* Relleno para que no quede apretado */
-    border-radius: 50px;     /* Bordes completamente redondos */
-    
-    margin-bottom: 35px;     /* Espacio antes de las cards */
-    
-    /* Un toque estético extra (Borde verde sutil) */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: inline-block;
+    padding: 8px 25px;
+    border-radius: 50px;
+    margin-bottom: 35px;
     border: 1px solid rgba(57, 255, 20, 0.3); 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Sombra para que flote */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
 }
 
 /* =========================================
@@ -370,7 +393,7 @@ header.scrolled {
 .game-card:hover .game-content { background: rgba(0, 0, 0, 0.3); }
 .game-card:hover { border-color: #39ff14; transform: scale(1.03); }
 
-/* Fondos Juegos (Asegúrate de tener estas imágenes) */
+/* Fondos Juegos */
 .l2-bg { background: url('assets/img_Lineage_2.png') center/cover no-repeat; }
 .cs2-bg { background: url('assets/img_Cs_2.png') center/cover no-repeat; }
 .dota-bg { background: url('assets/img_Dota_2.png') center/cover no-repeat; }
