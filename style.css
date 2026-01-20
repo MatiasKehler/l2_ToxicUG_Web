@@ -17,14 +17,26 @@ body {
     line-height: 1.6;
     color: #eee;
     padding-top: 80px;
+    background-color: #050505; /* Fondo de seguridad */
+    position: relative;        /* Necesario para el pseudo-elemento ::before */
+}
 
-    /* --- FONDO INMERSIVO --- */
-    background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), url('assets/img_Fondo_Principal.png');
-    background-attachment: fixed;
+/* --- FONDO "VIRTUAL" CON FILTROS --- */
+/* Esto permite bajarle la intensidad a la imagen sin oscurecer el texto */
+body::before {
+    content: "";
+    position: fixed;  /* Efecto Parallax fijo */
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;      /* Detrás del contenido */
+    
+    background: url('assets/img_Fondo_Principal.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: #0a0a0a;
+    
+    /* Filtros: Blanco y negro + Brillo reducido */
+    filter: grayscale(100%) brightness(0.4); 
 }
 
 /* Fuentes Góticas/Gamer */
@@ -51,14 +63,13 @@ header {
     padding: 1rem 0;
     position: fixed;
     width: 100%;
-    top: 0;
-    left: 0;
+    top: 0; left: 0;
     z-index: 1000;
     transition: all 0.3s ease;
     border-bottom: 1px solid #333;
 }
 
-/* Estado "Scrolled" */
+/* Estado "Scrolled" (Se activa con JS) */
 header.scrolled {
     background: rgba(0, 0, 0, 0.95);
     padding: 0.5rem 0;
@@ -71,12 +82,33 @@ header.scrolled {
     align-items: center;
 }
 
+/* --- Logo --- */
 .logo {
     font-size: 1.5rem;
     font-weight: bold;
     color: #fff;
     z-index: 1001;
     letter-spacing: 1px;
+    
+    /* Flexbox para alinear imagen y texto */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    height: 50px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover .logo-icon {
+    transform: rotate(-10deg) scale(1.1);
+    filter: drop-shadow(0 0 5px #39ff14);
+}
+
+.logo:hover {
+    color: #39ff14;
 }
 
 /* --- Enlaces del Menú --- */
@@ -107,7 +139,7 @@ header.scrolled {
 
 .nav-link:hover::after { transform: scaleX(1); }
 
-/* --- Botón "Unirse" --- */
+/* Botón "Unirse" */
 .nav-link.btn-primary {
     background: #007bff;
     padding: 8px 15px;
@@ -123,7 +155,7 @@ header.scrolled {
     box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
 }
 
-/* --- SELECTOR DE IDIOMA (Banderas) --- */
+/* --- Selector de Idioma (Banderas) --- */
 .lang-flags {
     display: flex;
     gap: 15px;
@@ -135,7 +167,7 @@ header.scrolled {
     width: 32px;
     height: auto;
     cursor: pointer;
-    opacity: 0.5;      /* Por defecto un poco apagadas */
+    opacity: 0.5;
     transition: all 0.3s ease;
     border-radius: 4px;
     border: 2px solid transparent;
@@ -148,11 +180,11 @@ header.scrolled {
 
 .flag-btn.active {
     opacity: 1;
-    border-color: #39ff14; /* Borde VERDE TÓXICO */
+    border-color: #39ff14;
     box-shadow: 0 0 10px rgba(57, 255, 20, 0.4);
 }
 
-/* --- Hamburguesa --- */
+/* --- Hamburguesa (Móvil) --- */
 .hamburger {
     display: none;
     cursor: pointer;
@@ -164,8 +196,8 @@ header.scrolled {
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    transition: all 0.3s ease-in-out;
     background-color: white;
+    transition: all 0.3s ease-in-out;
 }
 
 /* =========================================
@@ -400,39 +432,54 @@ header.scrolled {
 .ashes-bg { background: url('assets/img_Ashes_of_Creation.png') center/cover no-repeat; }
 
 /* =========================================
-   6. REDES SOCIALES
+   6. REDES SOCIALES (ICONOS)
    ========================================= */
 .social-links {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 15px;
     flex-wrap: wrap;
+    margin-top: 15px;
 }
 
 .social-btn {
-    padding: 6px 18px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: bold;
+    /* Forma redonda perfecta */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    
+    /* Centrar icono */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Estética base (transparente) */
+    background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
-    transition: all 0.3s ease;
-    border: 1px solid transparent;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.twitch { background-color: #9146ff; }
-.twitch:hover { background-color: #772ce8; box-shadow: 0 0 10px #9146ff; }
+/* Efecto Hover General */
+.social-btn:hover {
+    transform: translateY(-5px) scale(1.1);
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    border-color: transparent;
+}
 
-.youtube { background-color: #ff0000; }
-.youtube:hover { background-color: #cc0000; box-shadow: 0 0 10px #ff0000; }
-
-.discord { background-color: #5865F2; }
-.discord:hover { background-color: #4752c4; box-shadow: 0 0 10px #5865F2; }
-
-.instagram { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
-.instagram:hover { filter: brightness(1.2); box-shadow: 0 0 15px rgba(220, 39, 67, 0.7); transform: scale(1.05); }
-
-.kick { background-color: #53FC18; color: #000 !important; }
-.kick:hover { background-color: #39ff14; box-shadow: 0 0 15px rgba(83, 252, 24, 0.6); }
+/* --- Colores de Marca --- */
+.twitch:hover { background-color: #9146ff; box-shadow: 0 0 15px rgba(145, 70, 255, 0.6); }
+.youtube:hover { background-color: #ff0000; box-shadow: 0 0 15px rgba(255, 0, 0, 0.6); }
+.discord:hover { background-color: #5865F2; box-shadow: 0 0 15px rgba(88, 101, 242, 0.6); }
+.kick:hover { background-color: #53FC18; color: #000; box-shadow: 0 0 15px rgba(83, 252, 24, 0.6); }
+.instagram:hover { 
+    /* Degradado lineal más suave y oficial */
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    box-shadow: 0 0 15px rgba(220, 39, 67, 0.6);
+}
 
 /* =========================================
    7. FOOTER

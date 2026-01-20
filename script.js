@@ -1,6 +1,13 @@
+// ===============================================
+// ELEMENTOS DEL DOM
+// ===============================================
 const header = document.querySelector("header");
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
+
+// ===============================================
+// LÓGICA DE INTERFAZ (UI)
+// ===============================================
 
 // Evento Scroll: Cambia el diseño del header al bajar
 window.addEventListener("scroll", () => {
@@ -17,7 +24,7 @@ hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("active");
 });
 
-// Cerrar menú al hacer click en un enlace
+// Cerrar menú al hacer click en un enlace (Mejora UX en móvil)
 document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
     hamburger.classList.remove("active");
     navMenu.classList.remove("active");
@@ -108,9 +115,11 @@ const translations = {
     }
 };
 
-// FUNCIÓN PARA CAMBIAR EL IDIOMA Y LA BANDERA ACTIVA
+// ===============================================
+// FUNCIÓN PRINCIPAL DE CAMBIO DE IDIOMA
+// ===============================================
 function setLanguage(lang, element) {
-    // 1. Cambiar textos
+    // 1. Cambiar textos buscando elementos con 'data-i18n'
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -119,13 +128,13 @@ function setLanguage(lang, element) {
         }
     });
 
-    // 2. Actualizar estilo de banderas (Solo si se hizo click en una)
+    // 2. Actualizar estilo visual de las banderas
     if (element) {
-        // Quitar clase 'active' a todas
+        // Quitar clase 'active' a todas las banderas
         document.querySelectorAll('.flag-btn').forEach(flag => {
             flag.classList.remove('active');
         });
-        // Agregar clase 'active' a la clickeada
+        // Agregar clase 'active' solo a la clickeada
         element.classList.add('active');
     }
 }
