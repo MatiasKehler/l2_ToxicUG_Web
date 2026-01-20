@@ -55,10 +55,11 @@ const translations = {
         // ROTACIÓN JUEGOS
         rotation_title: "Nuestra Rotación",
         rotation_subtitle: "Además de desarrollar, competimos y nos divertimos en:",
-        game_core: "Main Core",
+        game_core: "Servidores Privados",
         game_comp: "Competitivo",
         game_ranked: "Ranked",
-        game_waiting: "Esperando Launch",
+        game_waiting: "Esperando Lanzamiento",
+        game_fornite: "Cero Construcción",
         // PROYECTOS
         projects_title: "Nuestros Proyectos",
         proj_l2_title: "⚔️ Próximamente: Lineage 2",
@@ -94,10 +95,11 @@ const translations = {
         // ROTACIÓN JUEGOS
         rotation_title: "Our Rotation",
         rotation_subtitle: "Besides developing, we compete and have fun in:",
-        game_core: "Main Core",
+        game_core: "Private Servers",
         game_comp: "Competitive",
         game_ranked: "Ranked",
-        game_waiting: "Awaiting Launch",
+        game_waiting: "Waiting For Release",
+        game_fornite: "Zero Build",
         // PROYECTOS
         projects_title: "Our Projects",
         proj_l2_title: "⚔️ Coming Soon: Lineage 2",
