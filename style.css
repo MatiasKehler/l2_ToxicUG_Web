@@ -383,6 +383,11 @@ header.scrolled {
     background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
     box-shadow: 0 0 15px rgba(220, 39, 67, 0.6);
 }
+.steam:hover { 
+    background-color: #171a21; /* Fondo Negro Steam */
+    color: #66c0f4;            /* Icono Azul Steam */
+    box-shadow: 0 0 15px rgba(102, 192, 244, 0.6); /* Brillo Azulado */
+}
 
 footer {
     background: #111; color: #777;
