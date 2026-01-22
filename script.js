@@ -49,9 +49,9 @@ const translations = {
         origin_text: "Todo comenzó con un grupo de amigos cansados de la monotonía. Lo que empezó como unas simples partidas nocturnas se transformó en una hermandad. Hoy somos una comunidad consolidada buscando crear un espacio donde la competitividad y la diversión van de la mano.",
         // STAFF
         staff_title: "Nuestros Referentes",
-        role_admin: "Admin & Developer",
-        role_team_leader: "Team Leader",
-        role_clan_leader: "Líder de Clan",
+        role_admin: "Administrador & Desarollador",
+        role_team_leader: "Líder de Clan",
+        role_clan_co_leader: "Colíder",
         // ROTACIÓN JUEGOS
         rotation_title: "Nuestra Rotación",
         rotation_subtitle: "Además de desarrollar, competimos y nos divertimos en:",
@@ -90,8 +90,8 @@ const translations = {
         // STAFF
         staff_title: "Our Staff",
         role_admin: "Admin & Developer",
-        role_team_leader: "Team Leader",
-        role_clan_leader: "Clan Leader",
+        role_team_leader: "Clan Leader",
+        role_clan_co_leader: "Co-Leader",
         // ROTACIÓN JUEGOS
         rotation_title: "Our Rotation",
         rotation_subtitle: "Besides developing, we compete and have fun in:",
