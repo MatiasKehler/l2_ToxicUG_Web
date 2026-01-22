@@ -1,16 +1,17 @@
 // ===============================================
-// ELEMENTOS DEL DOM
+// 1. ELEMENTOS DEL DOM
 // ===============================================
 const header = document.querySelector("header");
 const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 
 // ===============================================
-// LÓGICA DE INTERFAZ (UI)
+// 2. LÓGICA DE INTERFAZ (UI)
 // ===============================================
 
 // Evento Scroll: Cambia el diseño del header al bajar
 window.addEventListener("scroll", () => {
+    // Si el usuario baja más de 50px, oscurecemos el header
     if (window.scrollY > 50) {
         header.classList.add("scrolled");
     } else {
@@ -18,7 +19,7 @@ window.addEventListener("scroll", () => {
     }
 });
 
-// Toggle Menú: Abrir/Cerrar al hacer click en la hamburguesa
+// Toggle Menú Móvil: Abrir/Cerrar
 hamburger.addEventListener("click", () => {
     hamburger.classList.toggle("active");
     navMenu.classList.toggle("active");
@@ -31,7 +32,7 @@ document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", 
 }));
 
 // ===============================================
-// SISTEMA DE TRADUCCIÓN (I18N)
+// 3. SISTEMA DE TRADUCCIÓN (I18N)
 // ===============================================
 
 const translations = {
@@ -40,7 +41,7 @@ const translations = {
         nav_home: "Inicio",
         nav_about: "Nosotros",
         nav_events: "Eventos",
-        nav_join: "Unirse",
+        nav_login: "Ingresar",
         // HERO
         hero_title: "¡Sé parte de nuestra comunidad!",
         hero_btn: "Unirme al Discord",
@@ -80,7 +81,7 @@ const translations = {
         nav_home: "Home",
         nav_about: "About Us",
         nav_events: "Events",
-        nav_join: "Join Us",
+        nav_login: "Login",
         // HERO
         hero_title: "Be part of our community!",
         hero_btn: "Join Discord",
@@ -118,13 +119,14 @@ const translations = {
 };
 
 // ===============================================
-// FUNCIÓN PRINCIPAL DE CAMBIO DE IDIOMA
+// 4. FUNCIÓN PRINCIPAL DE CAMBIO DE IDIOMA
 // ===============================================
 function setLanguage(lang, element) {
     // 1. Cambiar textos buscando elementos con 'data-i18n'
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
+        // Si existe traducción para esa clave, la aplicamos
         if (translations[lang] && translations[lang][key]) {
             el.textContent = translations[lang][key];
         }
