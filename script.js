@@ -58,7 +58,7 @@ const translations = {
         rotation_subtitle: "Además de desarrollar, competimos y nos divertimos en:",
         game_core: "Servidores Privados",
         game_comp: "Competitivo",
-        game_ranked: "Ranked",
+        game_ranked: "Clasificatorio",
         game_waiting: "Esperando Lanzamiento",
         game_fornite: "Cero Construcción",
         // PROYECTOS
