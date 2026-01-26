@@ -1,28 +1,22 @@
+{% extends 'web/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Usuario - ToxicUG</title>
-    
-    <link rel="stylesheet" href="{% static 'web/style.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'web/assets/img_Icon_1.png' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <style>
-        body.modo-panel {
-            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url("{% static 'web/assets/images (2).jpg' %}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-        }
-    </style>
-</head>
+{% block title %}Panel de Usuario - ToxicUG{% endblock %}
 
-<body class="modo-panel">
+{% block body_class %}modo-panel{% endblock %}
 
+{% block extra_css %}
+<style>
+    body.modo-panel {
+        background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url("{% static 'web/assets/images (2).jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
     <header>
         <div class="container nav-container">
             <a href="{% url 'index' %}" class="logo">
@@ -31,7 +25,7 @@
             </a>
             <nav>
                 {% if user.is_superuser or user.is_staff %}
-                    <a href="/admin/" target="_blank" class="nav-link" style="color: #ff3333; border: 1px solid #ff3333; margin-right: 15px; padding: 5px 10px; border-radius: 4px;">
+                    <a href="/admin/" target="_blank" class="nav-link btn-admin">
                         <i class="fa-solid fa-gear"></i> Gestión (Admin)
                     </a>
                 {% endif %}
@@ -46,71 +40,77 @@
     <section class="panel-section">
         <div class="container">
             
-            <div class="user-profile-box">
-                <div class="profile-header">
-                    <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User Avatar" class="discord-avatar">
-                    <div class="profile-info">
-                        <h2>Bienvenido, <span class="username">{{ perfil.usuario.username }}</span></h2>
-                        <p class="rank">Rango: <span class="rank-badge">{{ perfil.rango }}</span></p>
+            {% if error %}
+                <div style="background: #ff3333; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
+                    <i class="fa-solid fa-triangle-exclamation"></i> {{ error }}
+                </div>
+            {% else %}
+            
+                <div class="user-profile-box">
+                    <div class="profile-header">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User Avatar" class="discord-avatar">
+                        <div class="profile-info">
+                            <h2>Bienvenido, <span class="username">{{ perfil.usuario.username }}</span></h2>
+                            <p class="rank">Rango: <span class="rank-badge">{{ perfil.rango }}</span></p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="stats-grid">
-                <div class="stat-card dkp-card">
-                    <div class="icon-stat"><i class="fa-solid fa-dragon"></i></div>
-                    <h3>Mis DKP</h3>
-                    <p class="number">{{ perfil.dkp_actuales }}</p>
-                    <span class="subtext">Puntos disponibles</span>
+                <div class="stats-grid">
+                    <div class="stat-card dkp-card">
+                        <div class="icon-stat"><i class="fa-solid fa-dragon"></i></div>
+                        <h3>Mis DKP</h3>
+                        <p class="number">{{ perfil.dkp_actuales }}</p>
+                        <span class="subtext">Puntos disponibles</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-stat"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Asistencia</h3>
+                        <p class="number">{{ perfil.asistencia_porcentaje }}%</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-stat"><i class="fa-solid fa-calendar-check"></i></div>
+                        <h3>Eventos</h3>
+                        <p class="number">{{ perfil.eventos_participados }}</p>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="icon-stat"><i class="fa-solid fa-chart-line"></i></div>
-                    <h3>Asistencia</h3>
-                    <p class="number">{{ perfil.asistencia_porcentaje }}%</p>
-                </div>
-                <div class="stat-card">
-                    <div class="icon-stat"><i class="fa-solid fa-calendar-check"></i></div>
-                    <h3>Eventos</h3>
-                    <p class="number">{{ perfil.eventos_participados }}</p>
-                </div>
-            </div>
 
-            <div class="history-table-box">
-                <h3>Historial de Puntos</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Fecha</th>
-                            <th>Evento</th>
-                            <th>Puntos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for movimiento in historial %}
-                        <tr>
-                            <td>{{ movimiento.fecha|date:"d/m/Y" }}</td>
-                            <td>{{ movimiento.evento }}</td>
-                            <td>
-                                {% if movimiento.cantidad > 0 %}
-                                    <span style="color: #00ff00;">+{{ movimiento.cantidad }}</span>
-                                {% else %}
-                                    <span style="color: #ff3333;">{{ movimiento.cantidad }}</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="3" style="text-align: center; color: #666; padding: 20px;">
-                                Aún no tienes actividad registrada.
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                <div class="history-table-box">
+                    <h3>Historial de Puntos</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Evento</th>
+                                <th>Puntos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for movimiento in historial %}
+                            <tr>
+                                <td>{{ movimiento.fecha|date:"d/m/Y" }}</td>
+                                <td>{{ movimiento.evento }}</td>
+                                <td>
+                                    {% if movimiento.cantidad > 0 %}
+                                        <span style="color: #00ff00;">+{{ movimiento.cantidad }}</span>
+                                    {% else %}
+                                        <span style="color: #ff3333;">{{ movimiento.cantidad }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="3" style="text-align: center; color: #666; padding: 20px;">
+                                    Aún no tienes actividad registrada.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            {% endif %}
             
         </div>
     </section>
-
-</body>
-</html>
+{% endblock %}

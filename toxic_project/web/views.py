@@ -4,30 +4,37 @@ from django.contrib.auth import logout
 from .models import Perfil, HistorialDKP
 
 def index(request):
+    """Vista de la portada pública."""
     return render(request, 'web/index.html')
 
-# --- EL PORTERO DE SEGURIDAD ---
-# Esta línea dice: "Si no está logueado, mándalo a /admin/"
 @login_required
 def panel(request):
+    """
+    Panel principal.
+    Si el usuario no tiene perfil (porque el Admin no lo creó),
+    muestra un mensaje de error en lugar de fallar o auto-crearlo.
+    """
     try:
         # 1. Buscamos el perfil del usuario conectado
         perfil_usuario = Perfil.objects.get(usuario=request.user)
         
-        # 2. Buscamos sus últimos 5 movimientos
-        historial = HistorialDKP.objects.filter(perfil=perfil_usuario).order_by('-fecha')[:5]
+        # 2. Buscamos historial (Optimizado: Trae los últimos 10)
+        historial = HistorialDKP.objects.filter(perfil=perfil_usuario).order_by('-fecha')[:10]
 
-        # 3. Empaquetamos los datos
         context = {
             'perfil': perfil_usuario,
             'historial': historial
         }
-        return render(request, 'web/panel.html', context)
-    
     except Perfil.DoesNotExist:
-        # Si el usuario existe pero no tiene perfil creado en la base de datos
-        return render(request, 'web/panel.html', {'error': 'Perfil no encontrado.'})
+        # CASO DE ERROR CONTROLADO:
+        # Si el usuario existe en Django pero no tiene ficha de jugador.
+        context = {
+            'error': 'Tu cuenta no tiene un Perfil de Jugador activo. Contacta a un Administrador.'
+        }
+    
+    return render(request, 'web/panel.html', context)
 
 def salir(request):
-    logout(request) # Cierra la sesión
-    return redirect('index') # Te manda a la portada
+    """Cierra sesión y redirige a la portada."""
+    logout(request)
+    return redirect('index')

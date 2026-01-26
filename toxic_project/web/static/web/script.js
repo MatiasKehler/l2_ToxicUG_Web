@@ -9,27 +9,29 @@ const navMenu = document.querySelector(".nav-menu");
 // 2. LÓGICA DE INTERFAZ (UI)
 // ===============================================
 
-// Evento Scroll: Cambia el diseño del header al bajar
-window.addEventListener("scroll", () => {
-    // Si el usuario baja más de 50px, oscurecemos el header
-    if (window.scrollY > 50) {
-        header.classList.add("scrolled");
-    } else {
-        header.classList.remove("scrolled");
-    }
-});
+// Evento Scroll
+if (header) {
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+            header.classList.add("scrolled");
+        } else {
+            header.classList.remove("scrolled");
+        }
+    });
+}
 
-// Toggle Menú Móvil: Abrir/Cerrar
-hamburger.addEventListener("click", () => {
-    hamburger.classList.toggle("active");
-    navMenu.classList.toggle("active");
-});
+// Toggle Menú Móvil
+if (hamburger && navMenu) {
+    hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        navMenu.classList.toggle("active");
+    });
 
-// Cerrar menú al hacer click en un enlace (Mejora UX en móvil)
-document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
-    hamburger.classList.remove("active");
-    navMenu.classList.remove("active");
-}));
+    document.querySelectorAll(".nav-link").forEach(n => n.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navMenu.classList.remove("active");
+    }));
+}
 
 // ===============================================
 // 3. SISTEMA DE TRADUCCIÓN (I18N)
@@ -74,7 +76,17 @@ const translations = {
         proj_giveaway_title: "📢 Sorteos y Eventos",
         proj_giveaway_desc: "Participa en sorteos mensuales de items, cuentas premium y merchandising oficial.",
         // FOOTER
-        footer_copy: "© 2026 Toxic Under Groove. Todos los derechos reservados."
+        footer_copy: "© 2026 Toxic Under Groove. Todos los derechos reservados.",
+        
+        // --- LOGIN (SIMPLIFICADO) ---
+        login_title: "ACCESO",
+        login_user_label: "USUARIO",
+        login_user_ph: "Tu usuario...",
+        login_pass_label: "CONTRASEÑA",
+        login_pass_ph: "••••••",
+        login_btn: "INGRESAR",
+        login_back: "Volver a la portada",
+        login_error: "Error de credenciales."
     },
     en: {
         // NAV
@@ -114,31 +126,52 @@ const translations = {
         proj_giveaway_title: "📢 Giveaways and Events",
         proj_giveaway_desc: "Participate in monthly giveaways for items, premium accounts, and official merchandise.",
         // FOOTER
-        footer_copy: "© 2026 Toxic Under Groove. All rights reserved."
+        footer_copy: "© 2026 Toxic Under Groove. All rights reserved.",
+
+        // --- LOGIN (SIMPLIFIED) ---
+        login_title: "LOGIN",
+        login_user_label: "USERNAME",
+        login_user_ph: "Your username...",
+        login_pass_label: "PASSWORD",
+        login_pass_ph: "••••••",
+        login_btn: "ENTER",
+        login_back: "Back to home",
+        login_error: "Invalid credentials."
     }
 };
 
 // ===============================================
 // 4. FUNCIÓN PRINCIPAL DE CAMBIO DE IDIOMA
 // ===============================================
-function setLanguage(lang, element) {
-    // 1. Cambiar textos buscando elementos con 'data-i18n'
+window.setLanguage = function(lang, element) {
+    // 1. Guardar preferencia
+    localStorage.setItem('toxic_lang', lang);
+
+    // 2. Cambiar textos buscando elementos con 'data-i18n'
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(el => {
         const key = el.getAttribute('data-i18n');
-        // Si existe traducción para esa clave, la aplicamos
         if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
+            // DETECCIÓN INTELIGENTE
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translations[lang][key];
+            } else {
+                el.textContent = translations[lang][key];
+            }
         }
     });
 
-    // 2. Actualizar estilo visual de las banderas
-    if (element) {
-        // Quitar clase 'active' a todas las banderas
-        document.querySelectorAll('.flag-btn').forEach(flag => {
-            flag.classList.remove('active');
-        });
-        // Agregar clase 'active' solo a la clickeada
-        element.classList.add('active');
-    }
-}
+    // 3. Actualizar estilo visual de las banderas
+    document.querySelectorAll('.flag-btn').forEach(flag => {
+        flag.classList.remove('active');
+        if(flag.getAttribute('onclick') && flag.getAttribute('onclick').includes(lang)) {
+            flag.classList.add('active');
+        }
+    });
+};
+
+// --- AUTO-INICIO ---
+document.addEventListener('DOMContentLoaded', () => {
+    const savedLang = localStorage.getItem('toxic_lang') || 'es';
+    setLanguage(savedLang, null);
+});

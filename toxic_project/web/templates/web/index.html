@@ -1,20 +1,9 @@
+{% extends 'web/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToxicUG - Comunidad Gamer</title>
-    
-    <link rel="stylesheet" href="{% static 'web/style.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'web/assets/img_Icon_1.png' %}">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
 
+{% block title %}ToxicUG - Comunidad Gamer{% endblock %}
+
+{% block content %}
     <header>
         <div class="container nav-container">
             <a href="#inicio" class="logo">
@@ -29,7 +18,7 @@
                     <li class="nav-item"><a href="#eventos" class="nav-link" data-i18n="nav_events">Eventos</a></li>
                     
                     <li class="nav-item">
-                        <a href="panel.html" class="nav-link btn-login" data-i18n="nav_login">
+                        <a href="{% url 'login' %}" class="nav-link btn-login" data-i18n="nav_login">
                             <i class="fa-brands fa-discord"></i> Ingresar
                         </a>
                     </li>
@@ -76,51 +65,33 @@
             <h2 data-i18n="staff_title">Nuestros Referentes</h2>
             
             <div class="cards-grid">
-                
                 <div class="card member-card">
-                    <div class="avatar-container">
-                        <img src="#" alt="img_wadeN" class="avatar">
-                    </div>
+                    <div class="avatar-container"><img src="#" alt="img_wadeN" class="avatar"></div>
                     <h3>wadeN</h3>
                     <p class="role" data-i18n="role_admin">Administrador & Desarollador</p>
                     <div class="social-links">
-                        <a href="https://kick.com/waden-zs" target="_blank" class="social-btn kick" aria-label="Kick">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                <path d="M19.5 3h-3.8L9.5 10.8V3H5v18h4.5v-7.6l5.7 7.6h4.3l-7.3-8.8L19.5 3z"/>
-                            </svg>
-                        </a>
-                        <a href="https://steamcommunity.com/id/wadeN_/" target="_blank" class="social-btn steam" aria-label="Steam">
-                            <i class="fa-brands fa-steam"></i>
-                        </a>
+                        <a href="https://kick.com/waden-zs" target="_blank" class="social-btn kick"><i class="fa-solid fa-k"></i></a>
+                        <a href="https://steamcommunity.com/id/wadeN_/" target="_blank" class="social-btn steam"><i class="fa-brands fa-steam"></i></a>
                     </div>
                 </div>
 
                 <div class="card member-card">
-                    <div class="avatar-container">
-                        <img src="#" alt="img_aAbyZz" class="avatar">
-                    </div>
+                    <div class="avatar-container"><img src="#" alt="img_aAbyZz" class="avatar"></div>
                     <h3>aAbyZz</h3>
                     <p class="role" data-i18n="role_team_leader">Líder de Clan</p>
                     <div class="social-links">
-                        <a href="https://steamcommunity.com/profiles/76561198067865880" target="_blank" class="social-btn steam" aria-label="Steam">
-                            <i class="fa-brands fa-steam"></i>
-                        </a>
+                        <a href="https://steamcommunity.com/profiles/76561198067865880" target="_blank" class="social-btn steam"><i class="fa-brands fa-steam"></i></a>
                     </div>
                 </div>
 
                 <div class="card member-card">
-                    <div class="avatar-container">
-                        <img src="#" alt="img_Nighthawk" class="avatar">
-                    </div>
+                    <div class="avatar-container"><img src="#" alt="img_Nighthawk" class="avatar"></div>
                     <h3>Nighthawk</h3>
                     <p class="role" data-i18n="role_clan_co_leader">Colíder</p>
                     <div class="social-links">
-                        <a href="https://steamcommunity.com/id/NightHawkBrc/" target="_blank" class="social-btn steam" aria-label="Steam">
-                            <i class="fa-brands fa-steam"></i>
-                        </a>
+                        <a href="https://steamcommunity.com/id/NightHawkBrc/" target="_blank" class="social-btn steam"><i class="fa-brands fa-steam"></i></a>
                     </div>
                 </div>
-
             </div> 
             
             <div class="divider-small"></div>
@@ -130,34 +101,19 @@
 
             <div class="cards-grid">
                 <div class="card game-card ashes-bg">
-                    <div class="game-content">
-                        <h3>Ashes of Creation</h3>
-                        <span data-i18n="game_waiting">Esperando Lanzamiento</span>
-                    </div>
+                    <div class="game-content"><h3>Ashes of Creation</h3><span data-i18n="game_waiting">Esperando Lanzamiento</span></div>
                 </div>
                 <div class="card game-card cs2-bg">
-                    <div class="game-content">
-                        <h3>Counter Strike 2</h3>
-                        <span data-i18n="game_comp">Competitivo</span>
-                    </div>
+                    <div class="game-content"><h3>Counter Strike 2</h3><span data-i18n="game_comp">Competitivo</span></div>
                 </div>
                 <div class="card game-card dota-bg">
-                    <div class="game-content">
-                        <h3>Dota 2</h3>
-                        <span data-i18n="game_ranked">Clasificatorio</span>
-                    </div>
+                    <div class="game-content"><h3>Dota 2</h3><span data-i18n="game_ranked">Clasificatorio</span></div>
                 </div>
                 <div class="card game-card fornite-bg">
-                    <div class="game-content">
-                        <h3>Fornite</h3>
-                        <span data-i18n="game_fornite">Cero Construcción</span>
-                    </div>
+                    <div class="game-content"><h3>Fornite</h3><span data-i18n="game_fornite">Cero Construcción</span></div>
                 </div>
                 <div class="card game-card l2-bg">
-                    <div class="game-content">
-                        <h3>Lineage 2</h3>
-                        <span data-i18n="game_core">Servidores Privados</span>
-                    </div>
+                    <div class="game-content"><h3>Lineage 2</h3><span data-i18n="game_core">Servidores Privados</span></div>
                 </div>
             </div> 
         </div> 
@@ -197,8 +153,4 @@
             <p data-i18n="footer_copy">&copy; 2026 Toxic Under Groove. Todos los derechos reservados.</p>
         </div>
     </footer>
-
-    <script src="{% static 'web/script.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}

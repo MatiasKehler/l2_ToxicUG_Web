@@ -1,36 +1,29 @@
-"""
-Django settings for toxic_project project.
-Modified for Deployment on PythonAnywhere.
-"""
-
+import os
 from pathlib import Path
-import os # <--- AGREGADO: Necesario para algunas rutas del sistema
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# --- RUTA BASE DEL PROYECTO ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# --- SEGURIDAD ---
+# IMPORTANTE: En un futuro, estas dos variables deberían venir de un archivo .env oculto
 SECRET_KEY = 'django-insecure-no#e7=x^qc))bieg6#yczea69tsi=&ynnwty2vor5+jx=t#5fd'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# Cuando ya esté todo listo en internet, cambiaremos esto a False.
 DEBUG = True
 
-# --- ⚠️ CAMBIO CRÍTICO 1: PERMISOS ---
-# El asterisco '*' permite que se vea desde cualquier dominio (PythonAnywhere, tu PC, etc).
-ALLOWED_HOSTS = ['*'] 
+# Permitimos localhost y cualquier subdominio de pythonanywhere
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.pythonanywhere.com']
 
-
-# Application definition
-
+# --- APLICACIONES ---
 INSTALLED_APPS = [
-    'web',
+    # Apps de Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Mis Apps
+    'web',
 ]
 
 MIDDLEWARE = [
@@ -48,7 +41,7 @@ ROOT_URLCONF = 'toxic_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [], # Django buscará automáticamente en las carpetas 'templates' de cada app
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,8 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'toxic_project.wsgi.application'
 
-
-# Database
+# --- BASE DE DATOS ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -71,45 +63,25 @@ DATABASES = {
     }
 }
 
-
-# Password validation
+# --- VALIDACIÓN DE CONTRASEÑAS ---
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-
-# --- 🌍 CAMBIO CRÍTICO 2: IDIOMA Y HORA ---
-# Esto pone el panel en Español y la hora de Argentina
-LANGUAGE_CODE = 'es-ar' 
-
+# --- IDIOMA Y ZONA HORARIA ---
+LANGUAGE_CODE = 'es-ar'
 TIME_ZONE = 'America/Argentina/Buenos_Aires'
-
 USE_I18N = True
-
 USE_TZ = True
 
-
-# --- 🎨 CAMBIO CRÍTICO 3: ARCHIVOS ESTÁTICOS ---
-# Esto es OBLIGATORIO para PythonAnywhere.
-# STATIC_URL es "cómo se llama el link".
-# STATIC_ROOT es "dónde guarda Django los archivos reales en el servidor".
-
+# --- ARCHIVOS ESTÁTICOS (CSS, Imágenes) ---
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # <--- ESTA LÍNEA ES VITAL
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-
-# --- CONFIGURACIÓN DE LOGIN ---
-LOGIN_URL = 'login'           
-LOGIN_REDIRECT_URL = 'panel'  
+# --- REDIRECCIONES Y LOGIN ---
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'panel'
 LOGOUT_REDIRECT_URL = 'index'

@@ -1,56 +1,44 @@
+{% extends 'web/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Restringido | Toxic Under Groove</title>
-    
-    <link rel="stylesheet" href="{% static 'web/style.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'web/assets/img_Icon_1.png' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <style>
-        body.modo-login {
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("{% static 'web/assets/images (2).jpg' %}");
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
-</head>
+{% block title %}Acceso Restringido | ToxicUG{% endblock %}
 
-<body class="modo-login">
+{% block body_class %}modo-login{% endblock %}
 
+{% block extra_css %}
+{% endblock %}
+
+{% block content %}
     <div class="login-container">
         <img src="{% static 'web/assets/img_Icon_1.png' %}" alt="Logo TUG" class="login-logo">
-        <h2>IDENTIFÍCATE</h2>
+        
+        <h2 data-i18n="login_title">ACCESO</h2>
 
         <form method="post">
             {% csrf_token %}
             
             {% if form.errors %}
                 <p style="color: #ff3333; margin-bottom: 15px; font-size: 0.9rem;">
-                    <i class="fa-solid fa-circle-exclamation"></i> Error de credenciales.
+                    <i class="fa-solid fa-circle-exclamation"></i> 
+                    <span data-i18n="login_error">Error de credenciales.</span>
                 </p>
             {% endif %}
 
             <div class="input-group">
-                <label><i class="fa-solid fa-user"></i> USUARIO</label>
-                <input type="text" name="username" class="form-control" placeholder="Tu usuario..." required autofocus>
+                <label data-i18n="login_user_label"><i class="fa-solid fa-user"></i> USUARIO</label>
+                <input type="text" name="username" class="form-control" placeholder="Tu usuario..." data-i18n="login_user_ph" required autofocus>
             </div>
 
             <div class="input-group">
-                <label><i class="fa-solid fa-key"></i> CONTRASEÑA</label>
-                <input type="password" name="password" class="form-control" placeholder="••••••" required>
+                <label data-i18n="login_pass_label"><i class="fa-solid fa-key"></i> CONTRASEÑA</label>
+                <input type="password" name="password" class="form-control" placeholder="••••••" data-i18n="login_pass_ph" required>
             </div>
 
-            <button type="submit" class="btn-login">INGRESAR AL SISTEMA</button>
+            <button type="submit" class="btn-login" data-i18n="login_btn">INGRESAR</button>
         </form>
 
         <a href="{% url 'index' %}" class="back-link">
-            <i class="fa-solid fa-arrow-left"></i> Volver a la portada
+            <i class="fa-solid fa-arrow-left"></i> <span data-i18n="login_back">Volver a la portada</span>
         </a>
     </div>
-
-</body>
-</html>
+{% endblock %}

@@ -1,45 +1,47 @@
 from django.contrib import admin
 from .models import Perfil, HistorialDKP
 
-# --- ACCIONES PERSONALIZADAS ---
+# --- ACCIONES MASIVAS (ACTIONS) ---
 
 @admin.action(description='🎁 Dar 100 DKP (Bonus Raid)')
 def dar_bonus_raid(modeladmin, request, queryset):
-    # 'queryset' es la lista de todos los jugadores que seleccionaste con el tilde
-    for perfil_jugador in queryset:
-        # Creamos una entrada en el historial para cada uno
+    count = 0
+    for perfil in queryset:
         HistorialDKP.objects.create(
-            perfil=perfil_jugador,
+            perfil=perfil,
             evento="Bonus Raid (Masivo)",
             cantidad=100
         )
-    # Mensaje de éxito en la pantalla (la barrita verde arriba)
-    modeladmin.message_user(request, f"Se han entregado 100 DKP a {queryset.count()} jugadores.")
+        count += 1
+    modeladmin.message_user(request, f"¡Éxito! Se entregaron 100 DKP a {count} jugadores.")
 
 @admin.action(description='⚠️ Multa por Toxicidad (-50 DKP)')
 def aplicar_multa(modeladmin, request, queryset):
-    for perfil_jugador in queryset:
+    count = 0
+    for perfil in queryset:
         HistorialDKP.objects.create(
-            perfil=perfil_jugador,
+            perfil=perfil,
             evento="Sanción disciplinaria",
             cantidad=-50
         )
-    modeladmin.message_user(request, f"Se ha multado a {queryset.count()} jugadores.")
+        count += 1
+    modeladmin.message_user(request, f"Se aplicó la multa a {count} jugadores.")
 
-# --- CONFIGURACIÓN DEL ADMIN ---
+# --- CONFIGURACIÓN DE TABLAS ---
 
 class PerfilAdmin(admin.ModelAdmin):
     list_display = ('usuario', 'rango', 'dkp_actuales', 'asistencia_porcentaje')
-    search_fields = ('usuario__username',)
-    list_filter = ('rango',) # Agregué filtro por Rango (útil para filtrar solo "Miembros")
-    
-    # AQUÍ REGISTRAMOS LAS ACCIONES NUEVAS
+    search_fields = ('usuario__username', 'discord_id')
+    list_filter = ('rango', 'asistencia_porcentaje')
     actions = [dar_bonus_raid, aplicar_multa]
+    list_per_page = 20 # Paginación para que no sea una lista infinita
 
 class HistorialAdmin(admin.ModelAdmin):
-    list_display = ('perfil', 'evento', 'cantidad', 'fecha')
-    list_filter = ('fecha', 'evento') # Agregué filtro por evento
+    list_display = ('fecha', 'perfil', 'evento', 'cantidad')
+    list_filter = ('fecha', 'evento')
+    search_fields = ('perfil__usuario__username', 'evento')
+    date_hierarchy = 'fecha' # Agrega una barra de navegación por fechas arriba
 
-# Registros
+# --- REGISTRO ---
 admin.site.register(Perfil, PerfilAdmin)
 admin.site.register(HistorialDKP, HistorialAdmin)
