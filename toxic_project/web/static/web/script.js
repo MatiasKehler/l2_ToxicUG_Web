@@ -86,7 +86,22 @@ const translations = {
         login_pass_ph: "••••••",
         login_btn: "INGRESAR",
         login_back: "Volver a la portada",
-        login_error: "Error de credenciales."
+        login_error: "Error de credenciales.",
+
+        // --- PANEL DE USUARIO ---
+        panel_admin: "Gestión (Admin)",
+        panel_logout: "Salir",
+        panel_welcome: "Bienvenido",
+        panel_rank: "Rango",
+        panel_dkp: "Mis DKP",
+        panel_avail: "Puntos disponibles",
+        panel_att: "Asistencia",
+        panel_evts: "Eventos",
+        panel_hist_title: "Historial de Puntos",
+        panel_th_date: "Fecha",
+        panel_th_evt: "Evento",
+        panel_th_pts: "Puntos",
+        panel_no_activity: "Aún no tienes actividad registrada."
     },
     en: {
         // NAV
@@ -136,7 +151,22 @@ const translations = {
         login_pass_ph: "••••••",
         login_btn: "ENTER",
         login_back: "Back to home",
-        login_error: "Invalid credentials."
+        login_error: "Invalid credentials.",
+
+        // --- USER PANEL ---
+        panel_admin: "Management (Admin)",
+        panel_logout: "Logout",
+        panel_welcome: "Welcome",
+        panel_rank: "Rank",
+        panel_dkp: "My DKP",
+        panel_avail: "Points available",
+        panel_att: "Attendance",
+        panel_evts: "Events",
+        panel_hist_title: "Points History",
+        panel_th_date: "Date",
+        panel_th_evt: "Event",
+        panel_th_pts: "Points",
+        panel_no_activity: "No activity registered yet."
     }
 };
 

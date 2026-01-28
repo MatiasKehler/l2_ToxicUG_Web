@@ -26,12 +26,12 @@
             <nav>
                 {% if user.is_superuser or user.is_staff %}
                     <a href="/admin/" target="_blank" class="nav-link btn-admin">
-                        <i class="fa-solid fa-gear"></i> Gestión (Admin)
+                        <i class="fa-solid fa-gear"></i> <span data-i18n="panel_admin">Gestión (Admin)</span>
                     </a>
                 {% endif %}
                 
                 <a href="{% url 'logout' %}" class="nav-link btn-logout">
-                    <i class="fa-solid fa-right-from-bracket"></i> Salir
+                    <i class="fa-solid fa-right-from-bracket"></i> <span data-i18n="panel_logout">Salir</span>
                 </a>
             </nav>
         </div>
@@ -48,10 +48,12 @@
             
                 <div class="user-profile-box">
                     <div class="profile-header">
-                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User Avatar" class="discord-avatar">
+                        <img src="{% static 'web/assets/avatar_waden.jpg' %}" alt="User Avatar" class="discord-avatar">
+                        
                         <div class="profile-info">
-                            <h2>Bienvenido, <span class="username">{{ perfil.usuario.username }}</span></h2>
-                            <p class="rank">Rango: <span class="rank-badge">{{ perfil.rango }}</span></p>
+                            <h2><span data-i18n="panel_welcome">Bienvenido</span>, <span class="username">{{ perfil.usuario.username }}</span></h2>
+                            
+                            <p class="rank"><span data-i18n="panel_rank">Rango</span>: <span class="rank-badge">{{ perfil.rango }}</span></p>
                         </div>
                     </div>
                 </div>
@@ -59,30 +61,30 @@
                 <div class="stats-grid">
                     <div class="stat-card dkp-card">
                         <div class="icon-stat"><i class="fa-solid fa-dragon"></i></div>
-                        <h3>Mis DKP</h3>
+                        <h3 data-i18n="panel_dkp">Mis DKP</h3>
                         <p class="number">{{ perfil.dkp_actuales }}</p>
-                        <span class="subtext">Puntos disponibles</span>
+                        <span class="subtext" data-i18n="panel_avail">Puntos disponibles</span>
                     </div>
                     <div class="stat-card">
                         <div class="icon-stat"><i class="fa-solid fa-chart-line"></i></div>
-                        <h3>Asistencia</h3>
+                        <h3 data-i18n="panel_att">Asistencia</h3>
                         <p class="number">{{ perfil.asistencia_porcentaje }}%</p>
                     </div>
                     <div class="stat-card">
                         <div class="icon-stat"><i class="fa-solid fa-calendar-check"></i></div>
-                        <h3>Eventos</h3>
+                        <h3 data-i18n="panel_evts">Eventos</h3>
                         <p class="number">{{ perfil.eventos_participados }}</p>
                     </div>
                 </div>
 
                 <div class="history-table-box">
-                    <h3>Historial de Puntos</h3>
+                    <h3 data-i18n="panel_hist_title">Historial de Puntos</h3>
                     <table>
                         <thead>
                             <tr>
-                                <th>Fecha</th>
-                                <th>Evento</th>
-                                <th>Puntos</th>
+                                <th data-i18n="panel_th_date">Fecha</th>
+                                <th data-i18n="panel_th_evt">Evento</th>
+                                <th data-i18n="panel_th_pts">Puntos</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -100,7 +102,7 @@
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="3" style="text-align: center; color: #666; padding: 20px;">
+                                <td colspan="3" style="text-align: center; color: #666; padding: 20px;" data-i18n="panel_no_activity">
                                     Aún no tienes actividad registrada.
                                 </td>
                             </tr>
