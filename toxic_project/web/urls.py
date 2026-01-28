@@ -1,15 +1,15 @@
 from django.urls import path
-from django.contrib.auth import views as auth_views
 from . import views
+from .views import CustomLoginView
 
 urlpatterns = [
     # Portada
     path('', views.index, name='index'),
     
-    # Área Privada (Cambiamos 'panel.html' por 'panel/' para que sea más elegante)
+    # Área Privada
     path('panel/', views.panel, name='panel'),
     
-    # Autenticación
-    path('login/', auth_views.LoginView.as_view(template_name='web/login.html'), name='login'),
+    # Autenticación (Usamos nuestra vista personalizada con seguridad)
+    path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', views.salir, name='logout'),
 ]
