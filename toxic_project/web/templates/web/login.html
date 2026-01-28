@@ -6,6 +6,28 @@
 {% block body_class %}modo-login{% endblock %}
 
 {% block extra_css %}
+<style>
+    /* Estilos para las alertas del Login */
+    .alert-box {
+        padding: 12px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        font-size: 0.9rem;
+        text-align: left;
+        border: 1px solid transparent;
+    }
+    .alert-error {
+        background: rgba(255, 51, 51, 0.15);
+        border-color: #ff3333;
+        color: #ff3333;
+    }
+    .alert-warning {
+        background: rgba(255, 204, 0, 0.15);
+        border-color: #ffcc00;
+        color: #ffcc00;
+    }
+    .alert-icon { margin-right: 8px; }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -17,11 +39,17 @@
         <form method="post">
             {% csrf_token %}
             
-            {% if form.errors %}
-                <p style="color: #ff3333; margin-bottom: 15px; font-size: 0.9rem;">
-                    <i class="fa-solid fa-circle-exclamation"></i> 
-                    <span data-i18n="login_error">Error de credenciales.</span>
-                </p>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert-box {% if message.tags == 'error' %}alert-error{% else %}alert-warning{% endif %}">
+                        {% if message.tags == 'error' %}
+                            <i class="fa-solid fa-lock alert-icon"></i>
+                        {% else %}
+                            <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
+                        {% endif %}
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endif %}
 
             <div class="input-group">
