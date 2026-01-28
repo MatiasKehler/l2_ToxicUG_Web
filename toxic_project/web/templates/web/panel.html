@@ -91,7 +91,10 @@
                             {% for movimiento in historial %}
                             <tr>
                                 <td>{{ movimiento.fecha|date:"d/m/Y" }}</td>
-                                <td>{{ movimiento.evento }}</td>
+                                
+                                <td class="translate-db" data-original="{{ movimiento.evento }}">
+                                    {{ movimiento.evento }}
+                                </td>
                                 <td>
                                     {% if movimiento.cantidad > 0 %}
                                         <span style="color: #00ff00;">+{{ movimiento.cantidad }}</span>
