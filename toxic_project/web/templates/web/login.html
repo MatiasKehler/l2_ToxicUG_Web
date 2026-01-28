@@ -7,26 +7,46 @@
 
 {% block extra_css %}
 <style>
-    /* Estilos para las alertas del Login */
+    /* ALINEACIÓN FLEXBOX PARA ALERTAS */
     .alert-box {
-        padding: 12px;
-        border-radius: 5px;
-        margin-bottom: 15px;
-        font-size: 0.9rem;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-size: 0.95rem;
         text-align: left;
         border: 1px solid transparent;
+        
+        /* MAGIA DE ALINEACIÓN */
+        display: flex;           
+        align-items: flex-start; /* Alinea items arriba (por si el texto es largo) */
+        gap: 12px;               /* Espacio entre icono y texto */
     }
+
+    /* COLUMNA DEL ICONO */
+    .alert-icon-wrapper {
+        flex-shrink: 0;      /* Evita que el icono se aplaste */
+        margin-top: 2px;     /* Ajuste óptico para centrar con la primera línea de texto */
+        font-size: 1.1rem;
+    }
+
+    /* COLUMNA DE TEXTO */
+    .alert-content {
+        display: flex;
+        flex-direction: column; /* Permite saltos de línea limpios */
+        line-height: 1.4;
+    }
+
+    /* COLORES */
     .alert-error {
-        background: rgba(255, 51, 51, 0.15);
-        border-color: #ff3333;
-        color: #ff3333;
+        background: rgba(220, 53, 69, 0.15);
+        border-color: #dc3545;
+        color: #ff6b6b;
     }
     .alert-warning {
-        background: rgba(255, 204, 0, 0.15);
-        border-color: #ffcc00;
-        color: #ffcc00;
+        background: rgba(255, 193, 7, 0.15);
+        border-color: #ffc107;
+        color: #ffca2c;
     }
-    .alert-icon { margin-right: 8px; }
 </style>
 {% endblock %}
 
@@ -42,12 +62,17 @@
             {% if messages %}
                 {% for message in messages %}
                     <div class="alert-box {% if message.tags == 'error' %}alert-error{% else %}alert-warning{% endif %}">
-                        {% if message.tags == 'error' %}
-                            <i class="fa-solid fa-lock alert-icon"></i>
-                        {% else %}
-                            <i class="fa-solid fa-triangle-exclamation alert-icon"></i>
-                        {% endif %}
-                        {{ message }}
+                        
+                        <div class="alert-icon-wrapper">
+                            {% if message.tags == 'error' %}
+                                <i class="fa-solid fa-lock"></i> {% else %}
+                                <i class="fa-solid fa-triangle-exclamation"></i> {% endif %}
+                        </div>
+
+                        <div class="alert-content">
+                            {{ message }}
+                        </div>
+
                     </div>
                 {% endfor %}
             {% endif %}
